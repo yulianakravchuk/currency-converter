@@ -1,0 +1,6 @@
+<ismodule template="/components/forms/selectCurrency"
+  name="selectcurrency"
+  attribute="sid"
+  attribute="vmodel"
+  attribute="handler"
+/>

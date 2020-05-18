@@ -1,0 +1,47 @@
+<isinclude template="/components/modules" />
+
+<isdecorate template="common/layout/page">
+  <div class="container mt-3 d-flex justify-content-around">
+    <isif condition="${!pdict.success}">
+        <div class="alert alert-danger" role="alert">
+            ${pdict.error.code} - ${pdict.error.info}
+        </div>
+    <iselse>
+        <div class="card w-50" id="currencyApp">
+            <div class="card-header" ref="action" data-url-rates="${URLUtils.http('CurrencyConverterService-UpdateRates')}">
+                <span class="fa fa-money pr-2"></span>${Resource.msg('page.title', 'home', null)}
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="text" 
+                               class="form-control"
+                               aria-label="From"
+                               v-model="info.countFrom" 
+                               @keypress="isNumber($event)"
+                               @input="change($event)"
+                               @change="change($event)"/>
+                    </div>
+                    <div class="col-6">
+                        <isselectcurrency sid="currencyFrom" vmodel="selectFrom" handler="updateRates($event)"/>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <input type="text" readonly class="form-control" aria-label="To" v-model="countTo"/>
+                    </div>
+                    <div class="col-6">
+                        <isselectcurrency sid="currencyTo" vmodel="info.currencyTo" />
+                    </div>
+                </div>
+
+                <div class="alert alert-danger mt-3" role="alert" v-if="errored">
+                    {{ error.info }}
+                </div>
+
+            </div>
+        </div>
+    </isif>
+  </div>
+</isdecorate>

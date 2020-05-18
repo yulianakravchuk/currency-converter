@@ -1,0 +1,5 @@
+<select class="form-control" id="${pdict.sid}" v-model="${pdict.vmodel}" @change="${pdict.handler}">
+  <isloop items="${Object.keys(pdict.availableCurrencies)}" var="currencyCode">
+    <option value="${currencyCode}">${pdict.availableCurrencies[currencyCode]}</option>
+  </isloop>
+</select>
